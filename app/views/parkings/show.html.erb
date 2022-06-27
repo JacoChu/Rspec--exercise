@@ -1,0 +1,20 @@
+<h1>停車費用計算</h1>
+
+<% if @parking.amount.present? %>
+
+  <p>從 <%= @parking.start_at %> 至 <%= @parking.end_at %><p>
+  <p>共 <%= @parking.duration %> 分鐘</p>
+  <p>總計 <%= number_to_currency(@parking.amount.to_f / 100, :unit => "¥") %> 元</p>
+
+  <p><%= link_to "繼續停車", new_parking_path %></p>
+
+<% else  %>
+
+  <%= form_for @parking do |f| %>
+  
+    <p>計費方式 <%= @parking.parking_type %></p>
+    <p><%= f.submit "結束計費" %></p>
+
+  <% end %>
+
+<% end %>
